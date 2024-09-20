@@ -67,4 +67,4 @@ def create_dataloaders(
                                 pin_memory=True # If True, the data loader will copy Tensors into device/CUDA pinned memory before returning them
                                 )
   
-  return train_dataloader, test_dataloader, class_names
+  return train_dataloader, test_dataloader, class_names, test_data
