@@ -11,15 +11,16 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 def pred_and_plot_image(model: torch.nn.Module,
                         image_path: str,
                         class_names:Dict[int, str],
-                        transform: torchvision.transforms,
+                        transform: torchvision.transforms = None,
                         device: torch.device = device
                         ):
   # Read in custom image
   
   custom_image = torchvision.io.read_image(str(image_path)).type(torch.float32) / 255
-  
+  custom_image_transformed = custom_image
   # Transform target image
-  custom_image_transformed = transform(custom_image)
+  if transform:
+    custom_image_transformed = transform(custom_image)
   
   model.eval()
   with torch.inference_mode():
